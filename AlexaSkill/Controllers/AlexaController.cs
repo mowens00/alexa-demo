@@ -13,7 +13,7 @@ namespace AlexaSkill.Controllers
     public class AlexaController : ApiController
     {
         [HttpPost, Route("api/alexa/demo")]
-        public AlexaResponseModel Pluralsight(AlexaRequestModel alexaRequest)
+        public AlexaResponseModel Alexa(AlexaRequestModel alexaRequest)
         {
 
             var request = alexaRequest.Request;
@@ -95,6 +95,7 @@ namespace AlexaSkill.Controllers
                 // set upper limit on number of towels
                 int maxNumberOfTowels = 10;
                 var numberOfTowelsValue = slotsList.FirstOrDefault(s => s.Key == "NumberOfTowels").Value;
+                int numberOfTowelsRequested = Convert.ToInt32(numberOfTowelsValue);
 
                 if (!string.IsNullOrWhiteSpace(numberOfTowelsValue) && int.TryParse(numberOfTowelsValue, out numberOfTowels) &&
                     !(numberOfTowels >= 1 && numberOfTowels <= maxNumberOfTowels))
@@ -104,7 +105,8 @@ namespace AlexaSkill.Controllers
             }
 
             // call api to open towels request
-            var output = new StringBuilder(numberOfTowels + "towels are on the way");
+
+            var output = new StringBuilder(numberOfTowels + " towels are on the way");
 
             return new AlexaResponseModel(output.ToString());
         }
