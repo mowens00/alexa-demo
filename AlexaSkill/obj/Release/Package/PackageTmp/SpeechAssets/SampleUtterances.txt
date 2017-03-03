@@ -1,4 +1,14 @@
-﻿HelloWorldIntent hello
-HelloWorldIntent say hello
-HelloWorldIntent say hello world
-HelloWorldIntent send more towels
+﻿TowelsIntent more towels
+TowelsIntent i need more towels
+TowelsIntent i would like some more towels
+TowelsIntent to send more towels
+TowelsIntent i'm out of towels
+TowelsIntent to send {NumberOfTowels} towels
+TowelsIntent i need {NumberofTowels} towels
+
+ToothbrushIntent i forgot my toothbrush
+ToothbrushIntent i need a toothbrush
+ToothbrushIntent to send a toothbrush
+ToothbrushIntent i lost my toothbrush
+
+AMAZON.CancelIntent cancel my request

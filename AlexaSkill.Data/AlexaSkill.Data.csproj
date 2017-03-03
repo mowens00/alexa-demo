@@ -67,7 +67,6 @@
     <Compile Include="Models\ResponseModel.cs" />
     <Compile Include="Models\SessionAttributesModel.cs" />
     <Compile Include="Models\SessionModel.cs" />
-    <Compile Include="Models\SlotModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Requests.cs" />
     <Compile Include="Cours.cs">

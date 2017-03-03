@@ -52,6 +52,7 @@ namespace AlexaSkill.Controllers
 
             return response;
         }
+
         private AlexaResponseModel IntentRequestHandler(RequestModel request)
         {
             AlexaResponseModel response = null;
@@ -64,15 +65,26 @@ namespace AlexaSkill.Controllers
                 case "ToothbrushIntent":
                     response = ToothbrushIntentHandler(request);
                     break;
+                case "AMAZON.CancelIntent":
+                case "AMAZON.StopIntent":
+                    response = CancelOrStopIntentHandler(request);
+                    break;
             }
 
             return response;
         }
+
         private AlexaResponseModel SessionEndedRequestHandler(RequestModel request)
         {
             // return null until we have server side session variables to clear out here
             return null;
         }
+
+        private AlexaResponseModel CancelOrStopIntentHandler(RequestModel request)
+        {
+            return new AlexaResponseModel("Canceling your request. Please let me know if you need anything else", true);
+        }
+
         private AlexaResponseModel TowelsIntentHandler(RequestModel request)
         {
             int numberOfTowels = 2;
@@ -91,12 +103,14 @@ namespace AlexaSkill.Controllers
                 }
             }
 
+            // call api to open towels request
             var output = new StringBuilder(numberOfTowels + "towels are on the way");
 
             return new AlexaResponseModel(output.ToString());
         }
         private AlexaResponseModel ToothbrushIntentHandler(RequestModel request)
         {
+            // call api to open toothbrush request
             var output = new StringBuilder("Your toothbrush is on the way");
 
             return new AlexaResponseModel(output.ToString());

@@ -1,7 +1,10 @@
 ﻿{
   "intents": [
     {
-      "intent": "HelloWorldIntent"
+      "intent": "TowelsIntent"
+    },
+    {
+      "intent": "ToothBrushIntent"
     },
     {
       "intent": "AMAZON.YesIntent"
@@ -10,7 +13,7 @@
       "intent": "AMAZON.NoIntent" 
     },
     {
-      "intent":  "AMAZON.HelpIntent" 
+      "intent": "AMAZON.HelpIntent"
     }
   ]
 }
