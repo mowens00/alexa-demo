@@ -1,0 +1,12 @@
+C:\code\alexa-demo\AlexaSkill.Data\bin\Debug\AlexaSkill.Data.dll.config
+C:\code\alexa-demo\AlexaSkill.Data\bin\Debug\AlexaSkill.Data.dll
+C:\code\alexa-demo\AlexaSkill.Data\bin\Debug\AlexaSkill.Data.pdb
+C:\code\alexa-demo\AlexaSkill.Data\bin\Debug\EntityFramework.dll
+C:\code\alexa-demo\AlexaSkill.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\code\alexa-demo\AlexaSkill.Data\bin\Debug\Newtonsoft.Json.dll
+C:\code\alexa-demo\AlexaSkill.Data\bin\Debug\EntityFramework.xml
+C:\code\alexa-demo\AlexaSkill.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\code\alexa-demo\AlexaSkill.Data\bin\Debug\Newtonsoft.Json.xml
+C:\code\alexa-demo\AlexaSkill.Data\obj\Debug\AlexaSkill.Data.dll
+C:\code\alexa-demo\AlexaSkill.Data\obj\Debug\AlexaSkill.Data.pdb
+C:\code\alexa-demo\AlexaSkill.Data\obj\Debug\AlexaSkill.Data.csprojResolveAssemblyReference.cache

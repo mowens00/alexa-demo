@@ -55,9 +55,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlexaRequest.cs" />
     <Compile Include="AlexaResponse.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="Models\AlexaRequestModel.cs" />
+    <Compile Include="Models\AlexaResponseModel.cs" />
+    <Compile Include="Models\ApplicationModel.cs" />
+    <Compile Include="Models\AttributesModel.cs" />
+    <Compile Include="Models\CardModel.cs" />
+    <Compile Include="Models\IntentModel.cs" />
+    <Compile Include="Models\OutputSpeechModel.cs" />
+    <Compile Include="Models\RepromptModel.cs" />
+    <Compile Include="Models\RequestModel.cs" />
+    <Compile Include="Models\ResponseModel.cs" />
+    <Compile Include="Models\SessionAttributesModel.cs" />
+    <Compile Include="Models\SessionModel.cs" />
+    <Compile Include="Models\SlotModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Requests.cs" />
     <Compile Include="Cours.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
