@@ -55,7 +55,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AlexaResponse.cs" />
     <Compile Include="Models\AlexaRequestModel.cs" />
     <Compile Include="Models\AlexaResponseModel.cs" />
     <Compile Include="Models\ApplicationModel.cs" />

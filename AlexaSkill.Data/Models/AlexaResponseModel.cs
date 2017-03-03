@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace AlexaSkill.Data.Models
 {
+    [JsonObject]
     public class AlexaResponseModel
     {
+        [JsonProperty("version")]
         public string Version { get; set; }
+        [JsonProperty("sessionAttributes")]
         public SessionAttributesModel SessionAttributes { get; set; }
+        [JsonProperty("response")]
         public ResponseModel Response { get; set; }
 
         public AlexaResponseModel()

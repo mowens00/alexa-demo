@@ -1,3 +1,4 @@
 ﻿HelloWorldIntent hello
 HelloWorldIntent say hello
 HelloWorldIntent say hello world
+HelloWorldIntent send more towels
