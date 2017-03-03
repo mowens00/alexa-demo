@@ -1,0 +1,4 @@
+﻿HelloWorldIntent hello
+HelloWorldIntent say hello
+HelloWorldIntent say hello world
+HelloWorldIntent tell ernie hello
