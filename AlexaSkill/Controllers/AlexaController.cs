@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web.Http;
+using AlexaSkill.Client;
 using AlexaSkill.Data;
 using AlexaSkill.Data.Models;
 
@@ -105,6 +106,9 @@ namespace AlexaSkill.Controllers
             }
 
             // call api to open towels request
+            var _client = new MonsApiClient("https://api-test.monscierge.com");
+
+            var apiResp = _client.CreateTowelsRequest(numberOfTowels);
 
             var output = new StringBuilder(numberOfTowels + " towels are on the way");
 

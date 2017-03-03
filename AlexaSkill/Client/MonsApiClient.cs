@@ -15,34 +15,33 @@ namespace AlexaSkill.Client
         }
 
         // PUT - create towels request
-        public async Task<IRestResponse<object>> CreateTowelsRequest(int numberOfTowels)
+        public IRestResponse CreateTowelsRequest(int numberOfTowels)
         {
-            var model = new MonsciergeRequestModel()
-            {
-                // i'm using request template Towels under Bathroom Requests on QA Resort (placeId = 467084)
-                RequestTemplateId = 123718,
-                Options = new [] {
-                    new MonsciergeRequestOptionsModel()
-                    {
-                        Option = new MonsciergeRequestOptionModel()
+
+            MonsciergeRequestOptionModel[] model = { new MonsciergeRequestOptionModel()
+                {
+                    Option = new OptionModel()
                         {
                             Id = 177833,
                             Name = "How many towels do you require?",
                             TemplateId = 123718,
-                            ValueNumber = numberOfTowels
-                        }
-                    }
-                },
-                // request user for matt owens
-                RequestUserId = 53161
+                        },
+                    ValueNumber = numberOfTowels
+                }
             };
+
+            var json = JsonConvert.SerializeObject(model);
 
             var request = new RestRequest("/v1/Requests", Method.PUT);
             request.RequestFormat = DataFormat.Json;
+            request.AddQueryParameter("placeId", "467084");
+            request.AddQueryParameter("firstName", "Matt");
+            request.AddQueryParameter("lastName", "Owens");
+            request.AddQueryParameter("templateId", "123718");
             request.AddHeader("Authorization", "S_AECB484B-15D4-4391-AE47-F9BC7FA0CC15");
             request.AddParameter("application/json", JsonConvert.SerializeObject(model), ParameterType.RequestBody);
 
-            var response = await _client.ExecutePostTaskAsync<object>(request);
+            var response = _client.Execute(request);
 
             return response;
         }
