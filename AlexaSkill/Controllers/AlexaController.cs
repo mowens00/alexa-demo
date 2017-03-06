@@ -64,8 +64,11 @@ namespace AlexaSkill.Controllers
                 case "TowelsIntent":
                     response = TowelsIntentHandler(request);
                     break;
-                case "BrokenToiledSeatIntent":
+                case "BrokenToiletSeatIntent":
                     response = BrokenToiletSeatIntentHandler();
+                    break;
+                case "MattIsGreatIntent":
+                    response = MattIsGreatIntentHandler();
                     break;
                 case "AMAZON.CancelIntent":
                 case "AMAZON.StopIntent":
@@ -95,7 +98,6 @@ namespace AlexaSkill.Controllers
             if (request.Intent.GetSlots().Any())
             {
                 var slotsList = request.Intent.GetSlots();
-                // set upper limit on number of towels
                 int maxNumberOfTowels = 10;
                 var numberOfTowelsValue = slotsList.FirstOrDefault(s => s.Key == "NumberOfTowels").Value;
 
@@ -103,23 +105,35 @@ namespace AlexaSkill.Controllers
                     int.TryParse(numberOfTowelsValue, out numberOfTowels) &&
                     !(numberOfTowels >= 1 && numberOfTowels <= maxNumberOfTowels))
                 {
-                    // if provided number of towels is outside of the range, send 3.
-                    numberOfTowels = 3;
+                    // if provided number of towels is outside of the allowed range, tell user to ask again.
+                    return new AlexaResponseModel("You can only request up to 10 towels. Please try your request again.", true);
+                }
+
+                // call api to open towels request
+                var client = new MonsApiClient("https://api-test.monscierge.com");
+                IRestResponse apiResp = client.CreateTowelsRequest(numberOfTowels);
+
+                if (apiResp.StatusCode != HttpStatusCode.OK)
+                {
+                    return new AlexaResponseModel("We're sorry, something went wrong with your request. Please try again.", true);
                 }
 
                 return new AlexaResponseModel("Thank you for your request. " + numberOfTowels + " towels are on the way", true);
             }
-            // call api to open towels request
-            var client = new MonsApiClient("https://api-test.monscierge.com");
-            IRestResponse apiResp = client.CreateTowelsRequest(numberOfTowels);
-
-            if (apiResp.StatusCode != HttpStatusCode.OK)
+            else
             {
-                return new AlexaResponseModel("We're sorry, something went wrong with your request. Please try again.", true);
+                // call api to open towels request
+                var client = new MonsApiClient("https://api-test.monscierge.com");
+                IRestResponse apiResp = client.CreateTowelsRequest(numberOfTowels);
+
+                if (apiResp.StatusCode != HttpStatusCode.OK)
+                {
+                    return new AlexaResponseModel("We're sorry, something went wrong with your request. Please try again.", true);
+                }
+
+                return new AlexaResponseModel("No problem. We'll send " + numberOfTowels + " more towels to your room right away.", true);
+
             }
-
-            return new AlexaResponseModel("No problem. We'll send " + numberOfTowels + " more towels to your room right away.", true);
-
         }
         private AlexaResponseModel BrokenToiletSeatIntentHandler()
         {
@@ -133,6 +147,11 @@ namespace AlexaSkill.Controllers
             }
 
             return new AlexaResponseModel("We're sorry about your broken toilet seat. An engineer will arrive shortly to fix it.", true);
+        }
+
+        private AlexaResponseModel MattIsGreatIntentHandler()
+        {
+            return new AlexaResponseModel("Matt is great and deserves a raise!!", true);
         }
     }
 }

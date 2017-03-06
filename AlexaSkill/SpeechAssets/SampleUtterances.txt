@@ -6,6 +6,7 @@ TowelsIntent i'm out of towels
 TowelsIntent to send {NumberOfTowels} towels
 TowelsIntent for {NumberOfTowels} towels
 TowelsIntent i need {NumberOfTowels} towels
+TowelsIntent i need {NumberOfTowels} more towels
 TowelsIntent i need some towels
 TowelsIntent all of my towels are dirty
 
@@ -13,5 +14,11 @@ BrokenToiletSeatIntent my toilet seat is broken
 BrokenToiletSeatIntent to please repair my toilet seat
 BrokenToiletSeatIntent the toilet seat is broken
 BrokenToiletSeatIntent the toilet is broken
+
+MattIsGreatIntent matt did a great job
+MattIsGreatIntent matt is great
+MattIsGreatIntent matt's great
+
+
 
 AMAZON.CancelIntent cancel my request
