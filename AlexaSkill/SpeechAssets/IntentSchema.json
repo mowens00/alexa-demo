@@ -10,7 +10,7 @@
       ]
     },
     {
-      "intent": "ToothbrushIntent"
+      "intent": "BrokenToiletSeatIntent"
     },
     {
       "intent": "AMAZON.YesIntent"

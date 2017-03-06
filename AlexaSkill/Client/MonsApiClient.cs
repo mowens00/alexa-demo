@@ -45,5 +45,24 @@ namespace AlexaSkill.Client
 
             return response;
         }
+
+        public IRestResponse CreateBrokenToiletSeatRequest()
+        {
+
+            var request = new RestRequest("/v1/Places/467084/Requests/Anonymous", Method.PUT);
+            request.RequestFormat = DataFormat.Json;
+            request.AddQueryParameter("placeId", "467084");
+            request.AddQueryParameter("deviceToken", "alexa demo");
+            request.AddQueryParameter("deviceId", "alexa demo");
+            request.AddQueryParameter("firstName", "Matt");
+            request.AddQueryParameter("lastName", "Owens");
+            request.AddQueryParameter("templateId", "123781");
+            request.AddHeader("Authorization", "Bearer S_AECB484B-15D4-4391-AE47-F9BC7FA0CC15");
+
+            var response = _client.Execute(request);
+
+            return response;
+        }
+
     }
 }

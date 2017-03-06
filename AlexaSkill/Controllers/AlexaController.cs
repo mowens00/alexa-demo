@@ -8,6 +8,7 @@ using System.Web.Http;
 using AlexaSkill.Client;
 using AlexaSkill.Data;
 using AlexaSkill.Data.Models;
+using RestSharp;
 
 namespace AlexaSkill.Controllers
 {
@@ -39,15 +40,15 @@ namespace AlexaSkill.Controllers
 
         private AlexaResponseModel LaunchRequestHandler(RequestModel request)
         {
-            var response = new AlexaResponseModel("Welcome to QA Resort. Do you need more towels? Or maybe you forgot a toothbrush");
+            var response = new AlexaResponseModel("Welcome to QA Resort. Please let us know if there is anything we can do to help.");
             response.Response.Card.Title = "Alexo Demo";
-            response.Response.Card.Content = "Hello world";
-            response.Response.Reprompt.OutputSpeech.Text = "Please pick one, more towels or a toothbrush?";
+            response.Response.Card.Content = "Monscierge Alexa Demo";
+            response.Response.Reprompt.OutputSpeech.Text = "How can we help?";
             response.Response.ShouldEndSession = false;
 
             if (request.Intent.Name == "AMAZON.NoIntent")
             {
-                response.Response.OutputSpeech.Text = "Ok. When would you like them?";
+                response.Response.OutputSpeech.Text = "Ok.";
                 response.Response.ShouldEndSession = true;
             }
 
@@ -63,8 +64,8 @@ namespace AlexaSkill.Controllers
                 case "TowelsIntent":
                     response = TowelsIntentHandler(request);
                     break;
-                case "ToothbrushIntent":
-                    response = ToothbrushIntentHandler(request);
+                case "BrokenToiledSeatIntent":
+                    response = BrokenToiletSeatIntentHandler();
                     break;
                 case "AMAZON.CancelIntent":
                 case "AMAZON.StopIntent":
@@ -88,38 +89,50 @@ namespace AlexaSkill.Controllers
 
         private AlexaResponseModel TowelsIntentHandler(RequestModel request)
         {
-            int numberOfTowels = 2;
+            int numberOfTowels = 3;
 
+            // check intent slots to see if user provided us with a number of towels
             if (request.Intent.GetSlots().Any())
             {
                 var slotsList = request.Intent.GetSlots();
                 // set upper limit on number of towels
                 int maxNumberOfTowels = 10;
                 var numberOfTowelsValue = slotsList.FirstOrDefault(s => s.Key == "NumberOfTowels").Value;
-                int numberOfTowelsRequested = Convert.ToInt32(numberOfTowelsValue);
 
-                if (!string.IsNullOrWhiteSpace(numberOfTowelsValue) && int.TryParse(numberOfTowelsValue, out numberOfTowels) &&
+                if (!string.IsNullOrWhiteSpace(numberOfTowelsValue) &&
+                    int.TryParse(numberOfTowelsValue, out numberOfTowels) &&
                     !(numberOfTowels >= 1 && numberOfTowels <= maxNumberOfTowels))
                 {
-                    numberOfTowels = maxNumberOfTowels;
+                    // if provided number of towels is outside of the range, send 3.
+                    numberOfTowels = 3;
                 }
+
+                return new AlexaResponseModel("Thank you for your request. " + numberOfTowels + " towels are on the way", true);
+            }
+            // call api to open towels request
+            var client = new MonsApiClient("https://api-test.monscierge.com");
+            IRestResponse apiResp = client.CreateTowelsRequest(numberOfTowels);
+
+            if (apiResp.StatusCode != HttpStatusCode.OK)
+            {
+                return new AlexaResponseModel("We're sorry, something went wrong with your request. Please try again.", true);
             }
 
-            // call api to open towels request
-            var _client = new MonsApiClient("https://api-test.monscierge.com");
+            return new AlexaResponseModel("No problem. We'll send " + numberOfTowels + " more towels to your room right away.", true);
 
-            var apiResp = _client.CreateTowelsRequest(numberOfTowels);
-
-            var output = new StringBuilder(numberOfTowels + " towels are on the way");
-
-            return new AlexaResponseModel(output.ToString());
         }
-        private AlexaResponseModel ToothbrushIntentHandler(RequestModel request)
+        private AlexaResponseModel BrokenToiletSeatIntentHandler()
         {
-            // call api to open toothbrush request
-            var output = new StringBuilder("Your toothbrush is on the way");
+            // call api to open broken toilet seat request
+            var client = new MonsApiClient("https://api-test.monscierge.com");
+            IRestResponse apiResp = client.CreateBrokenToiletSeatRequest();
 
-            return new AlexaResponseModel(output.ToString());
+            if (apiResp.StatusCode != HttpStatusCode.OK)
+            {
+                return new AlexaResponseModel("We're sorry, something went wrong with your request. Please try again.", true);
+            }
+
+            return new AlexaResponseModel("We're sorry about your broken toilet seat. An engineer will arrive shortly to fix it.", true);
         }
     }
 }

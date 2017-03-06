@@ -1,14 +1,17 @@
-﻿TowelsIntent more towels
+﻿TowelsIntent for more towels
 TowelsIntent i need more towels
 TowelsIntent i would like some more towels
 TowelsIntent to send more towels
 TowelsIntent i'm out of towels
 TowelsIntent to send {NumberOfTowels} towels
+TowelsIntent for {NumberOfTowels} towels
 TowelsIntent i need {NumberOfTowels} towels
+TowelsIntent i need some towels
+TowelIntent all of my towels are dirty
 
-ToothbrushIntent i forgot my toothbrush
-ToothbrushIntent i need a toothbrush
-ToothbrushIntent to send a toothbrush
-ToothbrushIntent i lost my toothbrush
+BrokenToiletSeatIntent my toilet seat is broken
+BrokenToiletSeatIntent to please repair my toilet seat
+BrokenToiletSeatIntent the toilet seat is broken
+BrokenToiletSeatIntent the toilet is broken
 
 AMAZON.CancelIntent cancel my request
