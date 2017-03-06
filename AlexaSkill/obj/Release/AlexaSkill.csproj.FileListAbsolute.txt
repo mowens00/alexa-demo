@@ -180,3 +180,5 @@ C:\code\alexa-demo\AlexaSkill\bin\System.Web.Http.Owin.xml
 C:\code\alexa-demo\AlexaSkill\obj\Release\AlexaSkill.csprojResolveAssemblyReference.cache
 C:\code\alexa-demo\AlexaSkill\obj\Release\AlexaSkill.dll
 C:\code\alexa-demo\AlexaSkill\obj\Release\AlexaSkill.pdb
+C:\code\alexa-demo\AlexaSkill\bin\RestSharp.dll
+C:\code\alexa-demo\AlexaSkill\bin\RestSharp.xml
