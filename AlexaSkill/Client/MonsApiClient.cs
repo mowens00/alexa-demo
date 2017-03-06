@@ -30,15 +30,13 @@ namespace AlexaSkill.Client
                 }
             };
 
-            var json = JsonConvert.SerializeObject(model);
-
-            var request = new RestRequest("/v1/Requests", Method.PUT);
+            var request = new RestRequest("/v1/Places/467084/Requests/Staff", Method.PUT);
             request.RequestFormat = DataFormat.Json;
             request.AddQueryParameter("placeId", "467084");
             request.AddQueryParameter("firstName", "Matt");
             request.AddQueryParameter("lastName", "Owens");
             request.AddQueryParameter("templateId", "123718");
-            request.AddHeader("Authorization", "S_AECB484B-15D4-4391-AE47-F9BC7FA0CC15");
+            request.AddHeader("Authorization", "Bearer AECB484B-15D4-4391-AE47-F9BC7FA0CC15");
             request.AddParameter("application/json", JsonConvert.SerializeObject(model), ParameterType.RequestBody);
 
             var response = _client.Execute(request);
